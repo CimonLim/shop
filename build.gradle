@@ -1,0 +1,28 @@
+plugins {
+    id 'java'
+    id 'org.springframework.boot' version '3.4.3'
+    id 'io.spring.dependency-management' version '1.1.7'
+
+}
+
+allprojects {
+    apply plugin: 'java'  // 추가
+    // env 파일 로드
+    apply from: rootProject.file('env.gradle')
+
+    repositories {
+        mavenCentral()
+    }
+
+
+
+}
+
+// root 프로젝트이기 때문에 빌드되지 않는 옵션
+bootJar{
+    enabled = false
+}
+
+jar{
+    enabled = false
+}

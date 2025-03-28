@@ -1,0 +1,88 @@
+
+plugins {
+    // Java 플러그인 적용 - Java 프로젝트의 기본 빌드 기능 제공
+    id 'java'
+
+    // Spring Boot 플러그인 - Spring Boot 애플리케이션 빌드를 위한 기능 제공
+    // 실행 가능한 JAR/WAR 생성, 의존성 관리, 스프링 부트 애플리케이션 실행 등의 기능 제공
+    // 버전은 부모의 버전에 따름
+    id 'org.springframework.boot'
+
+    // Spring Dependency Management 플러그인 - 스프링 관련 의존성 버전 관리
+    // 스프링 부트의 의존성 버전을 자동으로 관리해주어 호환성 문제 방지
+    id 'io.spring.dependency-management'
+}
+
+// 프로젝트 그룹 ID - 프로젝트를 고유하게 식별하는 그룹명
+group = 'org.shop'
+version = '0.0.1-SNAPSHOT'
+
+// 의존성을 가져올 저장소 설정
+repositories {
+    // Maven 중앙 저장소 사용 - 대부분의 Java 라이브러리가 호스팅되는 공식 저장소
+    mavenCentral()
+}
+
+// 프로젝트 의존성 설정 - 프로젝트에서 사용할 외부 라이브러리 정의
+dependencies {
+    // 개발 시 자동 재배포
+    developmentOnly 'org.springframework.boot:spring-boot-devtools'
+    
+    // 멀티 모듈 프로젝트의 다른 모듈 참조
+    implementation project(":db")     // db 모듈 의존성 - 데이터베이스 관련 모듈
+    implementation project(':common') // common 모듈 의존성 - 공통 기능 모듈
+
+    // Lombok 설정 - 자바 코드 자동 생성 라이브러리
+    compileOnly 'org.projectlombok:lombok'         // 컴파일 시에만 사용
+    annotationProcessor 'org.projectlombok:lombok' // 어노테이션 처리기
+
+    // RabbitMQ 메시지 큐 스타터 - 메시지 큐 기능 구현
+    implementation 'org.springframework.boot:spring-boot-starter-amqp'
+
+    // Spring Boot 웹 스타터 - 웹 애플리케이션 개발에 필요한 의존성
+    // 내장 톰캣, 스프링 MVC 등 포함
+    implementation 'org.springframework.boot:spring-boot-starter-web'
+
+    // Spring Boot 테스트 스타터 - 테스트 관련 의존성
+    // JUnit, Mockito 등 테스트 도구 포함
+    implementation 'org.springframework.boot:spring-boot-starter-test'
+
+    // Validation 스타터 - 입력값 검증을 위한 의존성
+    // Bean Validation API 구현체 포함
+    implementation 'org.springframework.boot:spring-boot-starter-validation'
+
+    // JPA 스타터 - JPA 관련 의존성
+    // Hibernate, JPA API 등 ORM 기능 포함
+    implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+
+    // Springdoc OpenAPI UI - Swagger UI를 통한 REST API 문서화
+    // API 엔드포인트 자동 문서화 및 테스트 인터페이스 제공
+    // https://mvnrepository.com/artifact/org.springdoc/springdoc-openapi-starter-webmvc-ui
+    implementation group: 'org.springdoc', name: 'springdoc-openapi-starter-webmvc-ui', version: '2.8.6'
+
+//    implementation 'org.springframework.boot:spring-boot-starter-security'
+
+    // jwt
+    implementation group: 'io.jsonwebtoken', name: 'jjwt-api', version: '0.12.6'
+    runtimeOnly group: 'io.jsonwebtoken', name: 'jjwt-impl', version: '0.12.6'
+    runtimeOnly group: 'io.jsonwebtoken', name: 'jjwt-jackson', version: '0.12.6'
+
+}
+
+// JUnit 플랫폼을 사용하여 테스트 실행
+// JUnit 5 테스트 실행을 위한 설정
+test {
+    useJUnitPlatform()
+}
+
+// 실행 가능한 JAR 파일 생성 설정
+bootJar {
+    enabled = true  // Spring Boot JAR 파일 생성 활성화 (실행 가능한 JAR)
+    // 모든 의존성을 포함한 실행 가능한 JAR 파일 생성
+}
+
+// 일반 JAR 파일 생성 설정
+jar {
+    enabled = false // 일반 JAR 파일 생성 비활성화 (라이브러리용 JAR)
+    // 다른 프로젝트에서 라이브러리로 사용되지 않으므로 비활성화
+}
