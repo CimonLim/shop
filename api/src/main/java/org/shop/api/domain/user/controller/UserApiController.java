@@ -1,5 +1,7 @@
 package org.shop.api.domain.user.controller;
 
+import io.swagger.v3.oas.annotations.Hidden;
+import io.swagger.v3.oas.annotations.Parameter;
 import lombok.RequiredArgsConstructor;
 import org.shop.api.common.annotation.UserSession;
 import org.shop.api.common.api.Api;
@@ -19,7 +21,7 @@ public class UserApiController {
 
     @GetMapping("/me")
     public Api<UserResponse> me(
-        @UserSession User user
+        @Parameter(hidden = true) @UserSession User user
     ){
         var response = userBusiness.me(user);
         return Api.OK(response);

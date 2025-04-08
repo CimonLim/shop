@@ -17,8 +17,4 @@ public abstract class BaseEntityLong extends BaseEntity<Long> {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
     private Long id;
-
-    public Long getId() {
-        return id;
-    }
 }

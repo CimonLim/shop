@@ -1,9 +1,8 @@
 package org.shop.api.domain.user.business;
 
 import lombok.RequiredArgsConstructor;
-import org.apache.catalina.Server;
+import lombok.extern.slf4j.Slf4j;
 import org.shop.api.common.annotation.Business;
-import org.shop.api.common.error.ErrorCode;
 import org.shop.api.common.error.ServerErrorCode;
 import org.shop.api.common.exception.ApiException;
 import org.shop.api.domain.token.business.TokenBusiness;
@@ -14,15 +13,16 @@ import org.shop.api.domain.user.controller.model.UserResponse;
 import org.shop.api.domain.user.converter.UserConverter;
 import org.shop.api.domain.user.model.User;
 import org.shop.api.domain.user.service.UserService;
+import org.shop.db.user.UserEntity;
 
 import java.util.Optional;
 
+@Slf4j
 @RequiredArgsConstructor
 @Business
 public class UserBusiness {
 
     private final UserService userService;
-    private final UserConverter userConverter;
 
     private final TokenBusiness tokenBusiness;
 
@@ -33,15 +33,15 @@ public class UserBusiness {
      * 3. save Entity -> response
      * 4. response return
      */
-    public UserResponse register(UserRegisterRequest request) {
+    public TokenResponse register(UserRegisterRequest request) {
 
-
-
-        return Optional.ofNullable(request)
-            .map(userConverter::toEntity)
+        UserEntity userEntity;
+        userEntity = Optional.ofNullable(request)
+            .map(UserConverter::toEntity)
             .map(userService::register)
-            .map(userConverter::toResponse)
-            .orElseThrow(() -> new ApiException(ServerErrorCode.NULL_POINT, "request null"));
+            .orElseThrow(() -> new ApiException(ServerErrorCode.NULL_POINT, "UserRegisterRequest null"));
+
+        return tokenBusiness.issueToken(userEntity);
     }
 
     /**
@@ -51,16 +51,15 @@ public class UserBusiness {
      * 4. token response
      */
     public TokenResponse login(UserLoginRequest request) {
-        var userEntity = userService.login(request.getEmail(), request.getPassword());
-        var tokenResponse = tokenBusiness.issueToken(userEntity);
-        return tokenResponse;
+        UserEntity userEntity;
+        userEntity = userService.login(request);
+        return tokenBusiness.issueToken(userEntity);
     }
 
     public UserResponse me(
         User user
     ) {
         var userEntity = userService.getUserWithThrow(user.getId());
-        var response = userConverter.toResponse(userEntity);
-        return response;
+        return UserConverter.toResponse(userEntity);
     }
 }

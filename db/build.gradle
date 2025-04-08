@@ -42,6 +42,10 @@ dependencies {
     // - 최신 버전은 Spring Boot의 의존성 관리를 통해 자동으로 선택됨
     runtimeOnly 'org.postgresql:postgresql'
 
+    // sql 로그 포매터
+    implementation 'com.github.gavlyukovskiy:p6spy-spring-boot-starter:1.9.0'
+
+
 
 }
 

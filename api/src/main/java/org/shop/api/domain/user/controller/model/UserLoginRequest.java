@@ -1,14 +1,12 @@
 package org.shop.api.domain.user.controller.model;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import jakarta.validation.constraints.NotBlank;
 
-@Data
+@Getter
 @NoArgsConstructor
-@AllArgsConstructor
 public class UserLoginRequest {
 
     @NotBlank

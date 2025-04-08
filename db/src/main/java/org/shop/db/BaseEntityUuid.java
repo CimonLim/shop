@@ -11,16 +11,17 @@ import org.hibernate.annotations.GenericGenerator;
 import java.util.UUID;
 
 @MappedSuperclass
-@Data
-@SuperBuilder
+@SuperBuilder(toBuilder = true)
 @NoArgsConstructor
-@AllArgsConstructor
+@Getter
 public abstract class BaseEntityUuid extends BaseEntity<UUID> {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.UUID)
-    @Column(columnDefinition = "UUID", name = "id")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(columnDefinition = "UUID DEFAULT uuid_generate_v4()", name = "id", updatable = false, nullable = false)
     private UUID id;
+
+
 
 
 }
