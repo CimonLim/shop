@@ -6,16 +6,11 @@ import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Pattern;
 import jakarta.validation.constraints.Size;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import org.hibernate.validator.constraints.Length;
 
-@Data
+@Getter
 @NoArgsConstructor
-@AllArgsConstructor
-@Builder
 @Schema(description = "사용자 회원가입 요청")
 public class UserRegisterRequest {
 
@@ -26,7 +21,7 @@ public class UserRegisterRequest {
     )
     @Size(max = 255, message = "이메일은 255자를 초과할 수 없습니다")
     @Schema(
-            example = "lsm@ccc.com",
+            example = "lsm@naver.com",
             description = "이메일 아이디",
             requiredMode = RequiredMode.REQUIRED
     )
@@ -69,7 +64,7 @@ public class UserRegisterRequest {
     )
     private String phoneNumber;
 
-    @Length(max = 500, message = "주소는 500자를 초과할 수 없습니다")
+    @Size(max = 500, message = "주소는 500자를 초과할 수 없습니다")
     @Schema(
             example = "서울특별시 강남구 테헤란로 123 4층",
             description = "주소",

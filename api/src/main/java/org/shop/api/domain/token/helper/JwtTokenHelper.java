@@ -64,7 +64,6 @@ public class JwtTokenHelper implements TokenHelperIfs {
 
     @Override
     public Map<String, Object> validationTokenWithThrow(String token) {
-//        SecretKey key = Jwts.SIG.HS256.key().build();  // 또는 기존 키를 사용하려면:
          SecretKey key = Keys.hmacShaKeyFor(secretKey.getBytes());
 
         try {
@@ -90,6 +89,4 @@ public class JwtTokenHelper implements TokenHelperIfs {
             }
         }
     }
-
-
 }

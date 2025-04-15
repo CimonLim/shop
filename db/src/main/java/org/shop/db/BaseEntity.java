@@ -16,10 +16,9 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 import java.time.LocalDateTime;
 
 @MappedSuperclass
-@Data
-@SuperBuilder
-@NoArgsConstructor()
-@AllArgsConstructor()
+@Getter
+@SuperBuilder(toBuilder = true)
+@NoArgsConstructor
 @EntityListeners(AuditingEntityListener.class)
 public abstract class BaseEntity<T> {
 

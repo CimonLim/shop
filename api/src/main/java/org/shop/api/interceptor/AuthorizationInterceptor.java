@@ -2,9 +2,9 @@ package org.shop.api.interceptor;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.shop.api.common.error.ErrorCode;
 import org.shop.api.common.error.TokenErrorCode;
 import org.shop.api.common.exception.ApiException;
+import org.shop.api.common.utils.AuthorizationExtractor;
 import org.shop.api.domain.token.business.TokenBusiness;
 import org.springframework.http.HttpMethod;
 import org.springframework.stereotype.Component;
@@ -16,6 +16,7 @@ import org.springframework.web.servlet.resource.ResourceHttpRequestHandler;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.util.Objects;
+import java.util.UUID;
 
 @Slf4j
 @RequiredArgsConstructor
@@ -38,20 +39,23 @@ public class AuthorizationInterceptor implements HandlerInterceptor {
             return true;
         }
 
-        var accessToken = request.getHeader("authorization-token");
-        if(accessToken == null){
-            throw new ApiException(TokenErrorCode.AUTHORIZATION_TOKEN_NOT_FOUND);
+        try {
+            // Bearer 토큰 추출
+            String token = AuthorizationExtractor.extract(request);
+            UUID userId = tokenBusiness.validationAccessToken(token);
+
+            if(userId != null){
+                var requestContext = Objects.requireNonNull(RequestContextHolder.getRequestAttributes());
+                requestContext.setAttribute("userId", userId, RequestAttributes.SCOPE_REQUEST);
+                return true;
+            }
+        }catch (ApiException e){
+            throw e;
+        }catch (Exception e) {
+            log.error("Authentication failed", e);
+            throw new ApiException(TokenErrorCode.TOKEN_EXCEPTION);
         }
 
-        var userId = tokenBusiness.validationAccessToken(accessToken);
-
-        if(userId != null){
-            var requestContext = Objects.requireNonNull(RequestContextHolder.getRequestAttributes());
-            requestContext.setAttribute("userId", userId, RequestAttributes.SCOPE_REQUEST);
-            return true;
-        }
-
-
-        throw new ApiException(ErrorCode.BAD_REQUEST, "인증실패");
+        throw new ApiException(TokenErrorCode.INVALID_TOKEN);
     }
 }

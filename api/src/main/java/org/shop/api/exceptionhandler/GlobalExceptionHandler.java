@@ -2,7 +2,6 @@ package org.shop.api.exceptionhandler;
 
 import lombok.extern.slf4j.Slf4j;
 import org.shop.api.common.api.Api;
-import org.shop.api.common.error.ErrorCode;
 import org.shop.api.common.error.ServerErrorCode;
 import org.springframework.core.annotation.Order;
 import org.springframework.http.ResponseEntity;

@@ -17,6 +17,19 @@ spring:
     username: @DB_USERNAME@
     password: @DB_PASSWORD@
 
+  data:
+    redis:
+      host: localhost
+      port: 6379              # Redis 서버 포트
+      database: 0             # Redis 데이터베이스 인덱스
+      timeout: 5000          # 연결 타임아웃 (밀리초)
+      lettuce: # Lettuce 클라이언트 설정
+        pool:
+          max-active: 8      # 최대 연결 수
+          max-idle: 8        # 최대 유휴 연결 수
+          min-idle: 0        # 최소 유휴 연결 수
+          max-wait: -1       # 최대 대기 시간 (-1은 무제한)
+
 token:
   secret:
     key: SpringBootJWTHelperTokenSecretKeyValue123!@#

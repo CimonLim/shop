@@ -13,7 +13,7 @@ public enum TokenErrorCode implements ErrorCodeIfs{
 
     TOKEN_EXPIRED(HttpStatus.UNAUTHORIZED.value(), 611, "만료된 토큰"),
     INVALID_TOKEN(HttpStatus.UNAUTHORIZED.value(), 612, "유효하지 않은 토큰"),
-    TOKEN_EXCEPTION(HttpStatus.UNAUTHORIZED.value(), 613, "토큰 알수없는 에러"),
+    TOKEN_EXCEPTION(HttpStatus.UNAUTHORIZED.value(), 613, "알수없는 토큰 에러"),
     AUTHORIZATION_TOKEN_NOT_FOUND(HttpStatus.BAD_REQUEST.value(), 614, "인증 헤더 토큰 없음"),
     INVALID_PERMISSION(HttpStatus.FORBIDDEN.value(), 615, "권한 부족"),
 
