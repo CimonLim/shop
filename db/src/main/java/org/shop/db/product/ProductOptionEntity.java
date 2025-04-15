@@ -3,6 +3,7 @@ package org.shop.db.product;
 import jakarta.persistence.*;
 import lombok.*;
 import lombok.experimental.SuperBuilder;
+import org.shop.db.BaseEntityInt;
 import org.shop.db.BaseEntityLong;
 
 import java.math.BigDecimal;
@@ -14,7 +15,7 @@ import java.util.UUID;
 @NoArgsConstructor
 @ToString
 @Table(name = "product_options", schema = "app")
-public class ProductOptionEntity extends BaseEntityLong {
+public class ProductOptionEntity extends BaseEntityInt {
 
     @Column(name = "product_id")
     private UUID productId;

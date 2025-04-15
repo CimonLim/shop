@@ -21,7 +21,4 @@ public abstract class BaseEntityUuid extends BaseEntity<UUID> {
     @Column(columnDefinition = "UUID DEFAULT uuid_generate_v4()", name = "id", updatable = false, nullable = false)
     private UUID id;
 
-
-
-
 }

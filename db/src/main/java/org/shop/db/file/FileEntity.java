@@ -3,6 +3,7 @@ package org.shop.db.file;
 import jakarta.persistence.*;
 import lombok.*;
 import lombok.experimental.SuperBuilder;
+import org.shop.db.BaseEntityInt;
 import org.shop.db.BaseEntityLong;
 import org.shop.db.file.enums.EntityType;
 import org.shop.db.file.enums.FileType;
@@ -15,7 +16,7 @@ import java.util.UUID;
 @NoArgsConstructor
 @ToString
 @Table(name = "files", schema = "app")
-public class FileEntity extends BaseEntityLong {
+public class FileEntity extends BaseEntityInt {
 
     @Column(name = "entity_type", nullable = false, length = 50)
     @Enumerated(EnumType.STRING)
