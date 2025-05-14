@@ -6,12 +6,12 @@ import lombok.Getter;
 @AllArgsConstructor
 @Getter
 public enum EntityType {
-    PRODUCT("PRODUCT"),
-    USER("USER"),
-    REVIEW("REVIEW"),
-    NOTICE("NOTICE"),
-    INQUIRY("INQUIRY"),
-    ORDER("ORDER");
+    PRODUCT("상품"),
+    USER("유저"),
+    REVIEW("리뷰"),
+    NOTICE("알림"),
+    INQUIRY("문의"),
+    ORDER("주문");
 
     private final String description;
 }

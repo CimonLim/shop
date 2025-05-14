@@ -6,10 +6,13 @@ import org.shop.db.user.enums.UserRole;
 import org.shop.db.user.enums.UserStatus;
 
 import java.time.LocalDateTime;
+import java.util.UUID;
 
 @Getter
 @Builder
 public class UserResponse {
+
+    private UUID id;
 
     private String email;
 

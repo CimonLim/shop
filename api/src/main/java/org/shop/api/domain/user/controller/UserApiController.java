@@ -1,6 +1,5 @@
 package org.shop.api.domain.user.controller;
 
-import io.swagger.v3.oas.annotations.Hidden;
 import io.swagger.v3.oas.annotations.Parameter;
 import lombok.RequiredArgsConstructor;
 import org.shop.api.common.annotation.UserSession;

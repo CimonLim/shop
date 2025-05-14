@@ -25,6 +25,7 @@ public class Api<T> {
         return api;
     }
 
+
     public static Api<Object> ERROR(Result result) {
         var api = new Api<Object>();
         api.result = result;

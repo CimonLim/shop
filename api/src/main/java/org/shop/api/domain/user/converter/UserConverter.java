@@ -29,6 +29,7 @@ public class UserConverter {
     public static UserResponse toResponse(UserEntity userEntity) {
         return Optional.ofNullable(userEntity)
                 .map(it -> UserResponse.builder()
+                        .id(userEntity.getId())
                         .email(userEntity.getEmail())
                         .name(userEntity.getName())
                         .role(userEntity.getRole())

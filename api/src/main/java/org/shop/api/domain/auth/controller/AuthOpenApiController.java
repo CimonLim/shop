@@ -7,10 +7,7 @@ import org.shop.api.common.api.Api;
 import org.shop.api.common.utils.AuthorizationExtractor;
 import org.shop.api.domain.token.business.TokenBusiness;
 import org.shop.api.domain.token.controller.model.TokenResponse;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestHeader;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @Slf4j
 @RestController
@@ -19,7 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class AuthOpenApiController {
     private final TokenBusiness tokenBusiness;
 
-    @PostMapping("/token/refresh")
+    @GetMapping("/token/refresh")
     public Api<TokenResponse> refreshToken(
             @Parameter(hidden = true) @RequestHeader("Authorization") String refreshToken
     ) {
