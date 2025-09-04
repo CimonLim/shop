@@ -23,7 +23,6 @@ import java.io.IOException;
 import java.util.Arrays;
 import java.util.UUID;
 
-// ✅ JWT
 
 @Slf4j
 @Component
@@ -33,6 +32,8 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
     private final TokenBusiness tokenBusiness;
     private final JwtSecurityProperties jwtSecurityProperties;
     private final AntPathMatcher pathMatcher = new AntPathMatcher();
+
+    public static final String TOKEN_ERROR_ATTRIBUTE = "TOKEN_ERROR_CODE";
 
 
     @Override
@@ -48,7 +49,6 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
 
         return isPublicPath;
     }
-
 
 
     @Override
@@ -68,20 +68,32 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
                 );
                 SecurityContextHolder.getContext().setAuthentication(auth);
 
-                // 성공시에만 다음 필터로 진행
-                filterChain.doFilter(request, response);
+
             } else {
                 // 토큰은 있지만 유효하지 않은 경우
-                throw new ApiException(TokenErrorCode.INVALID_TOKEN);
+                request.setAttribute(TOKEN_ERROR_ATTRIBUTE, TokenErrorCode.INVALID_TOKEN);
             }
 
+
         } catch (ApiException e) {
-            throw e;
+            // TokenBusiness에서 발생한 ApiException 처리
+            log.warn("토큰 검증 실패: {}", e.getMessage());
+
+            // ApiException의 ErrorCode를 TokenErrorCode로 변환
+            if (e.getErrorCodeIfs() instanceof TokenErrorCode) {
+                request.setAttribute(TOKEN_ERROR_ATTRIBUTE, (TokenErrorCode) e.getErrorCodeIfs());
+            } else {
+                // 기타 예외는 일반 토큰 예외로 처리
+                request.setAttribute(TOKEN_ERROR_ATTRIBUTE, TokenErrorCode.TOKEN_EXCEPTION);
+            }
+
         } catch (Exception e) {
-            throw new ApiException(TokenErrorCode.TOKEN_EXCEPTION);
+            // 예상치 못한 예외
+            log.error("JWT 토큰 처리 중 예상치 못한 오류 발생", e);
+            request.setAttribute(TOKEN_ERROR_ATTRIBUTE, TokenErrorCode.TOKEN_EXCEPTION);
         }
 
-
+        filterChain.doFilter(request, response);
     }
 
 

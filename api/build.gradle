@@ -62,7 +62,7 @@ dependencies {
     // JPA 스타터 - JPA 관련 의존성
     // Hibernate, JPA API 등 ORM 기능 포함
     implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
-    // ✅ PostgreSQL 드라이버 추가
+    // PostgreSQL 드라이버 추가
     runtimeOnly 'org.postgresql:postgresql'
 
     // Springdoc OpenAPI UI - Swagger UI를 통한 REST API 문서화

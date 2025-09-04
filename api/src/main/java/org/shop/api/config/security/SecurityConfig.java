@@ -2,6 +2,8 @@ package org.shop.api.config.security;
 
 import lombok.RequiredArgsConstructor;
 import org.shop.api.filter.JwtAuthenticationFilter;
+import org.shop.api.filter.exception.JwtAccessDeniedHandler;
+import org.shop.api.filter.exception.JwtAuthenticationEntryPoint;
 import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -21,6 +23,9 @@ public class SecurityConfig {
 
     private final JwtSecurityProperties jwtSecurityProperties;
     private final JwtAuthenticationFilter jwtAuthenticationFilter;
+
+    private final JwtAuthenticationEntryPoint jwtAuthenticationEntryPoint;
+    private final JwtAccessDeniedHandler jwtAccessDeniedHandler;
 
     @Bean
     public PasswordEncoder passwordEncoder() {
@@ -46,12 +51,16 @@ public class SecurityConfig {
                         .anyRequest().authenticated()
                 )
 
-                .addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class)
+                .exceptionHandling(exceptions -> exceptions
+                    .authenticationEntryPoint(jwtAuthenticationEntryPoint)
+                    .accessDeniedHandler(jwtAccessDeniedHandler)
+                )
 
+                .addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class)
                 .build();
     }
 
-    // 🎯 중복 등록 방지
+    // 중복 Bean 등록 방지
     @Bean
     public FilterRegistrationBean<JwtAuthenticationFilter> jwtFilterRegistration() {
         FilterRegistrationBean<JwtAuthenticationFilter> registration =

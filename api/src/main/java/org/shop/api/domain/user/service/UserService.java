@@ -39,7 +39,6 @@ public class UserService {
                 return userRepository.save(userEntity);
             })
             .orElseThrow(() -> new ApiException(ServerErrorCode.NULL_POINT, "User Entity Null"));
-
     }
 
     public UserEntity login(
