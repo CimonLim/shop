@@ -1,4 +1,23 @@
+server:
+  port: 8080
+  address: 0.0.0.0
+  servlet:
+    context-path: /
+    encoding:
+      charset: UTF-8
+      enabled: true
+  tomcat:
+    accept-count: 100
+    max-connections: 8192
+  compression:
+    enabled: true
+    mime-types: application/json,application/xml,text/html,text/xml,text/plain
+    min-response-size: 1024
+
 spring:
+  application:
+    name: shop-api
+
   rabbitmq:
     host: @RABBITMQ_HOST@
     port: @RABBITMQ_PORT@
@@ -30,13 +49,31 @@ spring:
           min-idle: 0        # 최소 유휴 연결 수
           max-wait: -1       # 최대 대기 시간 (-1은 무제한)
 
+app:
+  security:
+    jwt:
+      public-paths:
+        - "/open-api/**"
+        - "/swagger-ui/**"
+        - "/v1/api-docs/**"
+        - "/favicon.ico"
+        - "/error"
+        - "/actuator/health"
+
+      admin-paths:
+        - "/api/admin/**"
+        - "/api/management/**"
+
+
+
 token:
   secret:
-    key: SpringBootJWTHelperTokenSecretKeyValue123!@#
+    key: @JWT_SECRET_KEY@
   access-token:
     plus-hour: 1
   refresh-token:
     plus-hour: 12
+
 
 springdoc:
   api-docs:
@@ -44,6 +81,6 @@ springdoc:
     path: /v1/api-docs
   swagger-ui:
     enabled: true
-    path: /swagger-ui/index.html
+    path: /index.html
   default-produces-media-type: application/json
   default-consumes-media-type: application/json

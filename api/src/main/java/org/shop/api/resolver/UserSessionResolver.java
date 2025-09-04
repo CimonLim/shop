@@ -5,11 +5,11 @@ import org.shop.api.common.annotation.UserSession;
 import org.shop.api.domain.user.model.User;
 import org.shop.api.domain.user.service.UserService;
 import org.springframework.core.MethodParameter;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Component;
 import org.springframework.web.bind.support.WebDataBinderFactory;
 import org.springframework.web.context.request.NativeWebRequest;
-import org.springframework.web.context.request.RequestAttributes;
-import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.method.support.HandlerMethodArgumentResolver;
 import org.springframework.web.method.support.ModelAndViewContainer;
 
@@ -38,9 +38,8 @@ public class UserSessionResolver implements HandlerMethodArgumentResolver {
     public Object resolveArgument(MethodParameter parameter, ModelAndViewContainer mavContainer, NativeWebRequest webRequest, WebDataBinderFactory binderFactory) throws Exception {
         // support parameter 에서 true 반환시 여기 실행
 
-        // request context holder에서 찾아오기
-        var requestContext = RequestContextHolder.getRequestAttributes();
-        var userId = requestContext.getAttribute("userId", RequestAttributes.SCOPE_REQUEST);
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        UUID userId = UUID.fromString(authentication.getName());
 
         var userEntity = userService.getUserWithThrow(UUID.fromString(userId.toString()));
 
