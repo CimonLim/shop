@@ -11,16 +11,16 @@ import org.springframework.web.bind.annotation.*;
 
 @Slf4j
 @RestController
-@RequestMapping("/open-api/v1/auth")
+@RequestMapping("/api/v1/auth")
 @RequiredArgsConstructor
-public class AuthOpenApiController {
+public class AuthApiController {
     private final TokenBusiness tokenBusiness;
 
     @GetMapping("/token/refresh")
     public Api<TokenResponse> refreshToken(
-            @Parameter(hidden = true) @RequestHeader("Authorization") String refreshToken
+            @Parameter(hidden = true) @RequestHeader("Authorization") String authorizationHeader
     ) {
-        refreshToken = AuthorizationExtractor.extract(refreshToken);
+        var refreshToken = AuthorizationExtractor.extract(authorizationHeader);
         TokenResponse newTokens = tokenBusiness.refreshToken(refreshToken);
         return Api.OK(newTokens);
     }
