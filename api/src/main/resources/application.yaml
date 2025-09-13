@@ -56,14 +56,12 @@ app:
         - "/open-api/**"
         - "/swagger-ui/**"
         - "/v1/api-docs/**"
-        - "/favicon.ico"
         - "/error"
-        - "/actuator/health"
+        - "/open-api/health"
 
       admin-paths:
         - "/api/admin/**"
         - "/api/management/**"
-
 
 
 token:
