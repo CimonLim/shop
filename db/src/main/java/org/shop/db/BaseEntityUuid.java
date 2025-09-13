@@ -1,12 +1,9 @@
 package org.shop.db;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Data;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.experimental.SuperBuilder;
-import org.hibernate.annotations.GenericGenerator;
 
 import java.util.UUID;
 
@@ -14,7 +11,7 @@ import java.util.UUID;
 @SuperBuilder(toBuilder = true)
 @NoArgsConstructor
 @Getter
-public abstract class BaseEntityUuid extends BaseEntity<UUID> {
+public abstract class BaseEntityUuid extends BaseEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

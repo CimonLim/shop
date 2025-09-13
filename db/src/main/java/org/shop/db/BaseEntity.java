@@ -2,10 +2,7 @@ package org.shop.db;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.EntityListeners;
-import jakarta.persistence.Id;
 import jakarta.persistence.MappedSuperclass;
-import lombok.AllArgsConstructor;
-import lombok.Data;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.experimental.SuperBuilder;
@@ -20,7 +17,7 @@ import java.time.LocalDateTime;
 @SuperBuilder(toBuilder = true)
 @NoArgsConstructor
 @EntityListeners(AuditingEntityListener.class)
-public abstract class BaseEntity<T> {
+public abstract class BaseEntity {
 
 
     @CreatedDate

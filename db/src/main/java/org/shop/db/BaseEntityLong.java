@@ -12,7 +12,7 @@ import lombok.experimental.SuperBuilder;
 @Getter
 @SuperBuilder
 @NoArgsConstructor(access = lombok.AccessLevel.PROTECTED)
-public abstract class BaseEntityLong extends BaseEntity<Long> {
+public abstract class BaseEntityLong extends BaseEntity {
 
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
