@@ -12,32 +12,18 @@ import java.util.Optional;
 @Converter
 public class UserConverter {
 
-    public static UserEntity toEntity(UserRegisterRequest request) {
+    public static UserEntity registerRequestToEntity(UserRegisterRequest request) {
         return Optional.ofNullable(request)
-                .map(it -> {
-                    return UserEntity.builder()
-                            .email(request.getEmail())
-                            .password(request.getPassword())
-                            .name(request.getName())
-                            .phoneNumber(request.getPhoneNumber())
-                            .address(request.getAddress())
-                            .build();
-                })
+                .map(UserMapper.INSTANCE::registerRequestToEntity)
                 .orElseThrow(() -> new ApiException(ServerErrorCode.NULL_POINT, "UserRegisterRequest Null"));
     }
 
-    public static UserResponse toResponse(UserEntity userEntity) {
+    public static UserResponse entityToResponse(UserEntity userEntity) {
         return Optional.ofNullable(userEntity)
-                .map(it -> UserResponse.builder()
-                        .id(userEntity.getId())
-                        .email(userEntity.getEmail())
-                        .name(userEntity.getName())
-                        .role(userEntity.getRole())
-                        .status(userEntity.getStatus())
-                        .createdAt(userEntity.getCreatedAt())
-                        .build())
+                .map(UserMapper.INSTANCE::entityToResponse)
                 .orElseThrow(() -> new ApiException(ServerErrorCode.NULL_POINT, "UserEntity Null"));
     }
 
-
 }
+
+

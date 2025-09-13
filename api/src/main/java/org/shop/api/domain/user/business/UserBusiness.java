@@ -26,30 +26,19 @@ public class UserBusiness {
 
     private final TokenBusiness tokenBusiness;
 
-    /**
-     * 사용자에 대한 가입처리 로직
-     * 1. request -> entity
-     * 2. entity -> save
-     * 3. save Entity -> response
-     * 4. response return
-     */
+
     public TokenResponse register(UserRegisterRequest request) {
 
         UserEntity userEntity;
         userEntity = Optional.ofNullable(request)
-            .map(UserConverter::toEntity)
+            .map(UserConverter::registerRequestToEntity)
             .map(userService::register)
             .orElseThrow(() -> new ApiException(ServerErrorCode.NULL_POINT, "UserRegisterRequest null"));
 
         return tokenBusiness.issueToken(userEntity);
     }
 
-    /**
-     * 1. email, password 를 가지고 사용자 체크
-     * 2. user entity 로그인 확인
-     * 3. token 생성
-     * 4. token response
-     */
+
     public TokenResponse login(UserLoginRequest request) {
         UserEntity userEntity;
         userEntity = userService.login(request);
@@ -60,6 +49,6 @@ public class UserBusiness {
         User user
     ) {
         var userEntity = userService.getUserWithThrow(user.getId());
-        return UserConverter.toResponse(userEntity);
+        return UserConverter.entityToResponse(userEntity);
     }
 }
