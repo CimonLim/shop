@@ -3,8 +3,8 @@ services:
   rabbitmq:
     image: rabbitmq:latest
     ports:
-      - "5672:5672" # rabbit amqp port
-      - "15672:15672" # manage port
+      - "5672:5672"
+      - "15672:15672"
     environment:
-      - RABBITMQ_DEFAULT_USER=admin       # 기본사용자 이름
-      - RABBITMQ_DEFAULT_PASS=admin123!@# # 기본사용자 비밀번호
+      - RABBITMQ_DEFAULT_USER=${RABBITMQ_USER}
+      - RABBITMQ_DEFAULT_PASS=${RABBITMQ_PASSWORD}
