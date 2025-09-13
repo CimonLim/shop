@@ -67,6 +67,35 @@ app:
         - "/api/admin/**"
         - "/api/management/**"
 
+# Casbin 설정 (공식 문서 기준)
+casbin:
+  # Casbin 활성화 (기본값: true)
+  enableCasbin: true
+  # 분산 Enforcer 사용 (멀티 인스턴스 환경)
+  useDistributedEnforcer: true
+  # 자동 정책 저장 활성화
+  autoSave: true
+  # 저장소 타입: jdbc (PostgreSQL 사용)
+  storeType: jdbc
+  # PostgreSQL용 커스텀 테이블명
+  tableName: casbin_rule
+  # 데이터소스 초기화 정책 (테이블 자동 생성)
+  initializeSchema: create
+  # 모델 설정 파일 위치
+  model: classpath:casbin/model.conf
+  # 기본 RBAC 모델 사용 (모델 파일이 없을 경우)
+  useDefaultModelIfModelNotSetting: true
+  # Watcher 메커니즘 활성화 (멀티 인스턴스 동기화)
+  enableWatcher: true
+  # Watcher 타입: Redis 사용
+  watcherType: redis
+  # Spring 트랜잭션 지원
+  watcherTxSupport: true
+  # 예외 설정
+  exception:
+    removePolicyFailed: false
+
+
 token:
   secret:
     key: @JWT_SECRET_KEY@

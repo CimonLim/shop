@@ -76,6 +76,4 @@ public class UserService {
         ).orElseThrow(()-> new ApiException(UserErrorCode.USER_NOT_FOUND));
     }
 
-
-
 }
