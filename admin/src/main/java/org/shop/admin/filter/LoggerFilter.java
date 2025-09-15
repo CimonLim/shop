@@ -45,7 +45,7 @@ public class LoggerFilter implements Filter {
         var uri = req.getRequestURI();
         var method = req.getMethod();
 
-        log.info(">>>>> uri : {} , method : {} , header : {} , body : {}", uri, method, headerValues, requestBody);
+        log.debug(">>>>> uri : {} , method : {} , header : {} , body : {}", uri, method, headerValues, requestBody);
 
 
         // response 정보
@@ -64,7 +64,7 @@ public class LoggerFilter implements Filter {
 
         var responseBody = new String(res.getContentAsByteArray());
 
-        log.info("<<<<< uri : {} , method : {} , header : {} , body : {}", uri, method, responseHeaderValues, responseBody);
+        log.debug("<<<<< uri : {} , method : {} , header : {} , body : {}", uri, method, responseHeaderValues, responseBody);
 
 
         res.copyBodyToResponse();

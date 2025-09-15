@@ -14,15 +14,13 @@ import org.shop.admin.common.exception.ApiException;
 public class PermissionBusiness {
     private final Enforcer enforcer;
 
-    public boolean updateRoles() {
+    public boolean reload() {
         try{
             enforcer.clearPolicy();
             enforcer.loadPolicy();
             return true;
-        }
-        catch(Exception e){
+        } catch(Exception e){
             throw new ApiException(ServerErrorCode.SERVER_ERROR);
         }
-
     }
 }

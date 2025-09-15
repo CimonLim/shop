@@ -36,6 +36,7 @@ public class CasbinPermissionEvaluator implements PermissionEvaluator {
             boolean hasPermission = enforcer.enforce(username, resource, action);
 
             if (!hasPermission) {
+
                 String description = String.format(
                         "Casbin permission denied: resource=%s, action=%s",
                          resource, action
@@ -52,6 +53,8 @@ public class CasbinPermissionEvaluator implements PermissionEvaluator {
         } catch (ApiException e) {
             throw e;
         } catch (Exception e) {
+            log.error(e.getMessage(), e);
+
             throw new ApiException(PermissionErrorCode.CASBIN_ACCESS_DENIED, "Error occurred during CASBIN_ACCESS_DENIED in permission evaluation");
         }
     }

@@ -78,6 +78,10 @@ dependencies {
     // https://mvnrepository.com/artifact/org.springdoc/springdoc-openapi-starter-webmvc-ui
     implementation group: 'org.springdoc', name: 'springdoc-openapi-starter-webmvc-ui', version: '2.8.12'
 
+// https://mvnrepository.com/artifact/org.casbin/casbin-spring-boot-starter
+    implementation 'org.casbin:casbin-spring-boot-starter:1.9.0'
+    // https://mvnrepository.com/artifact/org.casbin/jcasbin-redis-watcher
+    implementation 'org.casbin:jcasbin-redis-watcher:1.8.0'
 
     // jwt
     implementation group: 'io.jsonwebtoken', name: 'jjwt-api', version: '0.12.6'

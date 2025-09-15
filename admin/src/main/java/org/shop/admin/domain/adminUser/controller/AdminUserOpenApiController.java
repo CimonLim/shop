@@ -15,7 +15,7 @@ import jakarta.validation.Valid;
 @Slf4j
 @RequiredArgsConstructor
 @RestController
-@RequestMapping("/open-api/admin_user")
+@RequestMapping("/open-api/admin/user")
 public class AdminUserOpenApiController {
 
     private final AdminUserBusiness adminUserBusiness;

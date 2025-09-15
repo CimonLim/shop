@@ -2,6 +2,7 @@ package org.shop.admin.common.error;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
+import org.springframework.http.HttpStatus;
 
 /**
  * User의 경우 1000번대 에러코드 사용
@@ -29,7 +30,7 @@ public enum UserErrorCode implements ErrorCodeIfs {
     LOGIN_ATTEMPT_EXCEEDED(401, 1104, "로그인 시도 횟수를 초과했습니다."),
 
     // 조회/검색 관련 오류 (1400~1499)
-    USER_NOT_FOUND(400, 1404, "사용자를 찾을 수 없습니다."),
+    USER_NOT_FOUND(HttpStatus.NOT_FOUND.value(), 1404, "사용자를 찾을 수 없습니다."),
 
     ;
 

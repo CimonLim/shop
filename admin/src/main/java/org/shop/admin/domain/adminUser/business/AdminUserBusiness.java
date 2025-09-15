@@ -28,13 +28,6 @@ public class AdminUserBusiness {
 
     private final AdminUserMapper adminUserMapper;
 
-    /**
-     * 사용자에 대한 가입처리 로직
-     * 1. request -> entity
-     * 2. entity -> save
-     * 3. save Entity -> response
-     * 4. response return
-     */
     public TokenResponse register(AdminUserRegisterRequest request) {
 
         AdminUserEntity adminUserEntity;
@@ -46,12 +39,6 @@ public class AdminUserBusiness {
         return tokenBusiness.issueToken(adminUserEntity);
     }
 
-    /**
-     * 1. email, password 를 가지고 사용자 체크
-     * 2. user entity 로그인 확인
-     * 3. token 생성
-     * 4. token response
-     */
     public TokenResponse login(AdminUserLoginRequest request) {
         AdminUserEntity adminUserEntity;
         adminUserEntity = adminUserService.login(request);

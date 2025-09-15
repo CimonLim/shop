@@ -1,5 +1,5 @@
 server:
-  port: 8081
+  port: 55478
   address: 0.0.0.0
   servlet:
     context-path: /
@@ -9,6 +9,15 @@ server:
   tomcat:
     accept-count: 100
     max-connections: 8192
+    access-log:
+      enabled: true
+      rotate: true
+      directory: ${user.dir}/logs
+      pattern: "%t [%h] \"%r\" %s %b %D ms \"%{Content-Type}o\" \"%{Authorization}i\""
+      prefix: access_log
+      suffix: .log
+      file-date-format: .yyyy-MM-dd
+      buffered: false
   compression:
     enabled: true
     mime-types: application/json,application/xml,text/html,text/xml,text/plain
@@ -16,7 +25,7 @@ server:
 
 spring:
   application:
-    name: shop-api
+    name: shop-admin-api
 
   main:
     allow-bean-definition-overriding: true
@@ -64,8 +73,8 @@ app:
         - "/open-api/health"
 
       admin-paths:
-        - "/api/admin/**"
-        - "/api/management/**"
+        - "/api22/admin/**"
+        - "/api22/management/**"
 
 # Casbin 설정 (공식 문서 기준)
 casbin:
@@ -119,3 +128,5 @@ springdoc:
 logging:
   level:
     root: INFO
+    org.apache.catalina.valves.AccessLogValve: DEBUG  # 추가
+    org.springframework.boot.web.embedded.tomcat: DEBUG  # 추가

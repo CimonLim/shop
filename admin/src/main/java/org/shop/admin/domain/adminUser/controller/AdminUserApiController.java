@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.*;
 
 @RequiredArgsConstructor
 @RestController
-@RequestMapping("/api/adminUser")
+@RequestMapping("/api/admin/user")
 public class AdminUserApiController {
 
     private final AdminUserBusiness adminUserBusiness;
@@ -30,7 +30,7 @@ public class AdminUserApiController {
 
 
     @PostMapping("list")
-    @PreAuthorize("hasPermission('admin_user', 'read')")
+    @PreAuthorize("hasPermission('admin_users', 'read')")
     public Api<AdminUserListResponse> getAdminUserList(
             @RequestBody
             @Valid

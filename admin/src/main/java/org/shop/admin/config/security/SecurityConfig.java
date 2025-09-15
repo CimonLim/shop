@@ -38,8 +38,6 @@ public class SecurityConfig {
 
         String[] publicPaths = jwtSecurityProperties.getPublicPaths()
                 .toArray(new String[0]);
-        String[] adminPaths = jwtSecurityProperties.getAdminPaths()
-                .toArray(new String[0]);
 
         return http
                 .csrf(AbstractHttpConfigurer::disable)
@@ -48,7 +46,6 @@ public class SecurityConfig {
 
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers(publicPaths).permitAll()
-                        .requestMatchers(adminPaths).hasRole("ADMIN")
                         .anyRequest().authenticated()
                 )
 
