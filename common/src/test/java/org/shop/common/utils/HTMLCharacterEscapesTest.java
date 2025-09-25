@@ -47,7 +47,7 @@ class HTMLCharacterEscapesTest {
 
             // Assert
             assertThat(escapes).isNotNull();
-            assertThat(escapes.length).isEqualTo(128); // ASCII 문자 범위
+            assertThat(escapes).hasSize(128); // ASCII 문자 범위
 
             // XSS 방지 문자들이 ESCAPE_CUSTOM으로 설정되었는지 확인
             assertThat(escapes['<']).isEqualTo(CharacterEscapes.ESCAPE_CUSTOM);
@@ -70,7 +70,7 @@ class HTMLCharacterEscapesTest {
 
             // Assert
             assertThat(result).isNotNull();
-            assertThat(result.length).isEqualTo(128);
+            assertThat(result).hasSize(128);
         }
 
 
@@ -123,64 +123,31 @@ class HTMLCharacterEscapesTest {
         @DisplayName("XSS 방지 문자 이스케이프 테스트")
         class XssPreventionCharacterTest {
 
-            @Test
-            @DisplayName("< 문자를 &lt;로 이스케이프한다")
-            void testGetEscapeSequence_withLessThan_shouldReturnLtEntity() {
+
+            @ParameterizedTest
+            @DisplayName("XSS 방지 문자들을 HTML 엔티티로 이스케이프한다")
+            @CsvSource({
+                    "'<', '&lt;', '< 문자를 &lt;로 이스케이프한다'",
+                    "'>', '&gt;', '> 문자를 &gt;로 이스케이프한다'",
+                    "'&', '&amp;', '& 문자를 &amp;로 이스케이프한다'",
+                    "'\"', '&quot;', '\" 문자를 &quot;로 이스케이프한다'",
+                    "'''', '&#x27;', ''' 문자를 &#x27;로 이스케이프한다'"
+            })
+            void testGetEscapeSequence_withXssCharacters_shouldReturnHtmlEntities(
+                    char inputChar,
+                    String expectedEscape,
+                    String description) {
                 // Act
-                SerializableString result = htmlCharacterEscapes.getEscapeSequence('<');
+                SerializableString result = htmlCharacterEscapes.getEscapeSequence(inputChar);
 
                 // Assert
-                assertThat(result).isNotNull();
-                assertThat(result.getValue()).isEqualTo("&lt;");
-                assertThat(result).isInstanceOf(SerializedString.class);
-            }
-
-            @Test
-            @DisplayName("> 문자를 &gt;로 이스케이프한다")
-            void testGetEscapeSequence_withGreaterThan_shouldReturnGtEntity() {
-                // Act
-                SerializableString result = htmlCharacterEscapes.getEscapeSequence('>');
-
-                // Assert
-                assertThat(result).isNotNull();
-                assertThat(result.getValue()).isEqualTo("&gt;");
-                assertThat(result).isInstanceOf(SerializedString.class);
-            }
-
-            @Test
-            @DisplayName("& 문자를 &amp;로 이스케이프한다")
-            void testGetEscapeSequence_withAmpersand_shouldReturnAmpEntity() {
-                // Act
-                SerializableString result = htmlCharacterEscapes.getEscapeSequence('&');
-
-                // Assert
-                assertThat(result).isNotNull();
-                assertThat(result.getValue()).isEqualTo("&amp;");
-                assertThat(result).isInstanceOf(SerializedString.class);
-            }
-
-            @Test
-            @DisplayName("\" 문자를 &quot;로 이스케이프한다")
-            void testGetEscapeSequence_withDoubleQuote_shouldReturnQuotEntity() {
-                // Act
-                SerializableString result = htmlCharacterEscapes.getEscapeSequence('"');
-
-                // Assert
-                assertThat(result).isNotNull();
-                assertThat(result.getValue()).isEqualTo("&quot;");
-                assertThat(result).isInstanceOf(SerializedString.class);
-            }
-
-            @Test
-            @DisplayName("' 문자를 &#x27;로 이스케이프한다")
-            void testGetEscapeSequence_withSingleQuote_shouldReturnHexEntity() {
-                // Act
-                SerializableString result = htmlCharacterEscapes.getEscapeSequence('\'');
-
-                // Assert
-                assertThat(result).isNotNull();
-                assertThat(result.getValue()).isEqualTo("&#x27;");
-                assertThat(result).isInstanceOf(SerializedString.class);
+                assertThat(result)
+                        .as(description)
+                        .isNotNull()
+                        .isInstanceOf(SerializedString.class);
+                assertThat(result.getValue())
+                        .as(description)
+                        .isEqualTo(expectedEscape);
             }
 
             @ParameterizedTest

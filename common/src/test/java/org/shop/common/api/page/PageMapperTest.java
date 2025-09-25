@@ -40,7 +40,7 @@ class PageMapperTest {
             PageInfo result = pageMapper.toPageInfo(page);
 
             // Assert
-            assertThat(result.getCurrentPage()).isEqualTo(0); // 0-based 유지
+            assertThat(result.getCurrentPage()).isZero(); // 0-based 유지
             assertThat(result.getPageSize()).isEqualTo(5);
             assertThat(result.getTotalElements()).isEqualTo(15);
             assertThat(result.getTotalPages()).isEqualTo(3);
@@ -90,7 +90,7 @@ class PageMapperTest {
 
             // Assert - 모든 속성 검증
             assertAll("첫 번째 페이지 속성 검증",
-                    () -> assertThat(result.getCurrentPage()).isEqualTo(0), // 0-based 유지
+                    () -> assertThat(result.getCurrentPage()).isZero(), // 0-based 유지
                     () -> assertThat(result.getPageSize()).isEqualTo(5),
                     () -> assertThat(result.getTotalElements()).isEqualTo(15),
                     () -> assertThat(result.getTotalPages()).isEqualTo(3),
@@ -168,11 +168,11 @@ class PageMapperTest {
 
             // Assert
             assertAll("빈 페이지 속성 검증",
-                    () -> assertThat(result.getCurrentPage()).isEqualTo(0), // 0-based 유지
+                    () -> assertThat(result.getCurrentPage()).isZero(), // 0-based 유지
                     () -> assertThat(result.getPageSize()).isEqualTo(10),
-                    () -> assertThat(result.getTotalElements()).isEqualTo(0),
-                    () -> assertThat(result.getTotalPages()).isEqualTo(0),
-                    () -> assertThat(result.getNumberOfElements()).isEqualTo(0),
+                    () -> assertThat(result.getTotalElements()).isZero(),
+                    () -> assertThat(result.getTotalPages()).isZero(),
+                    () -> assertThat(result.getNumberOfElements()).isZero(),
                     () -> assertThat(result.isFirst()).isTrue(),
                     () -> assertThat(result.isLast()).isTrue(),
                     () -> assertThat(result.isHasNext()).isFalse(),
@@ -194,7 +194,7 @@ class PageMapperTest {
 
             // Assert
             assertAll("단일 페이지 속성 검증",
-                    () -> assertThat(result.getCurrentPage()).isEqualTo(0), // 0-based 유지
+                    () -> assertThat(result.getCurrentPage()).isZero(), // 0-based 유지
                     () -> assertThat(result.getPageSize()).isEqualTo(10),
                     () -> assertThat(result.getTotalElements()).isEqualTo(3),
                     () -> assertThat(result.getTotalPages()).isEqualTo(1),
@@ -262,7 +262,7 @@ class PageMapperTest {
 
             // Assert
             assertAll("큰 페이지 크기 검증",
-                    () -> assertThat(result.getCurrentPage()).isEqualTo(0), // 0-based 유지
+                    () -> assertThat(result.getCurrentPage()).isZero(), // 0-based 유지
                     () -> assertThat(result.getPageSize()).isEqualTo(1000),
                     () -> assertThat(result.getTotalElements()).isEqualTo(3),
                     () -> assertThat(result.getTotalPages()).isEqualTo(1),
@@ -340,7 +340,7 @@ class PageMapperTest {
                     },
                     () -> {
                         if (result.isEmpty()) {
-                            assertThat(result.getNumberOfElements()).isEqualTo(0);
+                            assertThat(result.getNumberOfElements()).isZero();
                         }
                     }
             );

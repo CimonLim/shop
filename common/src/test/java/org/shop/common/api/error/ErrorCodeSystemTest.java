@@ -105,7 +105,7 @@ class ErrorCodeSystemTest {
                         UserErrorCode.values()
                 ).flatMap(Arrays::stream)
                 .map(e -> (ErrorCodeIfs) e) // 명시적 업캐스트
-                .collect(Collectors.toList());
+                .toList();
     }
 
     private String codeDesc(ErrorCodeIfs c) {
