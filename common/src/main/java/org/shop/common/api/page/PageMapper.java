@@ -13,7 +13,7 @@ public interface PageMapper {
     PageMapper INSTANCE= Mappers.getMapper(PageMapper.class);
 
 
-    @Mapping(target = "currentPage", expression = "pageNumber")  // 0-based → 1-based
+    @Mapping(target = "currentPage", source = "number")  // 0-based → 1-based
     @Mapping(target = "pageSize", source = "size")
     @Mapping(target = "hasNext", expression = "java(page.hasNext())")
     @Mapping(target = "hasPrevious", expression = "java(page.hasPrevious())")
