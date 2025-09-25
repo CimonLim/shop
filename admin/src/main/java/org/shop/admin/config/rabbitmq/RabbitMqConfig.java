@@ -31,7 +31,7 @@ public class RabbitMqConfig {
     }
 
 
-    /// end queue 설정
+    // end queue 설정
 
     @Bean
     public RabbitTemplate rabbitTemplate(

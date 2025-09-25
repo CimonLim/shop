@@ -1,8 +1,8 @@
 package org.shop.admin.exceptionhandler;
 
 import lombok.extern.slf4j.Slf4j;
-import org.shop.admin.common.api.Api;
-import org.shop.admin.common.error.ServerErrorCode;
+import org.shop.common.api.error.ServerErrorCode;
+import org.shop.common.api.response.Api;
 import org.springframework.core.annotation.Order;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -22,7 +22,7 @@ public class GlobalExceptionHandler {
         return ResponseEntity
             .status(500)
             .body(
-                Api.ERROR(ServerErrorCode.SERVER_ERROR, exception.getMessage())
+                Api.error(ServerErrorCode.SERVER_ERROR, exception.getMessage())
             );
     }
 }

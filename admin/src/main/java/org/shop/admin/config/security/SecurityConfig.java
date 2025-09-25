@@ -40,6 +40,7 @@ public class SecurityConfig {
                 .toArray(new String[0]);
 
         return http
+
                 .csrf(AbstractHttpConfigurer::disable)
                 .sessionManagement(session ->
                         session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))

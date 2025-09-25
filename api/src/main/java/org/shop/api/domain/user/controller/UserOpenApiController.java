@@ -3,7 +3,7 @@ package org.shop.api.domain.user.controller;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.shop.api.common.api.Api;
+import org.shop.common.api.response.Api;
 import org.shop.api.domain.token.controller.model.TokenResponse;
 import org.shop.api.domain.user.business.UserBusiness;
 import org.shop.api.domain.user.controller.model.UserLoginRequest;
@@ -29,7 +29,7 @@ public class UserOpenApiController {
         @RequestBody UserRegisterRequest request
     ){
             TokenResponse response = userBusiness.register(request);
-            return Api.OK(response);
+            return Api.ok(response);
     }
 
 
@@ -41,7 +41,7 @@ public class UserOpenApiController {
         @RequestBody UserLoginRequest request
     ){
         TokenResponse response = userBusiness.login(request);
-        return Api.OK(response);
+        return Api.ok(response);
     }
 
 }

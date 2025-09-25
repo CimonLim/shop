@@ -6,8 +6,8 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.shop.admin.common.api.Api;
-import org.shop.admin.common.error.TokenErrorCode;
+import org.shop.common.api.error.TokenErrorCode;
+import org.shop.common.api.response.Api;
 import org.springframework.security.access.AccessDeniedException;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -35,7 +35,7 @@ public class JwtAccessDeniedHandler implements AccessDeniedHandler {
                 request.getMethod(), request.getRequestURI(), username);
 
         // 권한 부족 에러 응답
-        Api<Object> apiResponse = Api.ERROR(
+        Api<Object> apiResponse = Api.error(
                 TokenErrorCode.INVALID_PERMISSION,
                 "해당 리소스에 접근할 권한이 없습니다."
         );

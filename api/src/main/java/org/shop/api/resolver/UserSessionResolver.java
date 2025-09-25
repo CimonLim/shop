@@ -1,7 +1,7 @@
 package org.shop.api.resolver;
 
 import lombok.RequiredArgsConstructor;
-import org.shop.api.common.annotation.UserSession;
+import org.shop.common.api.annotation.UserSession;
 import org.shop.api.domain.user.model.User;
 import org.shop.api.domain.user.service.UserService;
 import org.springframework.core.MethodParameter;

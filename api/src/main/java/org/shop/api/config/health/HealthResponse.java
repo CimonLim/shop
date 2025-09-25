@@ -1,11 +1,15 @@
 package org.shop.api.config.health;
 
 
+import lombok.AllArgsConstructor;
 import lombok.Builder;
-import lombok.Getter;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
-@Getter
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
 @Builder
 public class HealthResponse {
-    private final String health = "UP";
+    private String health;
 }

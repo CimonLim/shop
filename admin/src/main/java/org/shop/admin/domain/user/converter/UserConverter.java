@@ -1,11 +1,12 @@
 package org.shop.admin.domain.user.converter;
 
-import org.shop.admin.common.annotation.Converter;
-import org.shop.admin.common.error.ServerErrorCode;
-import org.shop.admin.common.exception.ApiException;
+import lombok.experimental.UtilityClass;
 import org.shop.admin.domain.user.controller.model.UserListRequest;
 import org.shop.admin.domain.user.controller.model.UserListResponse;
 import org.shop.admin.domain.user.controller.model.UserResponse;
+import org.shop.common.api.error.ServerErrorCode;
+import org.shop.common.api.exception.ApiException;
+import org.shop.common.api.page.PageInfo;
 import org.shop.db.user.UserEntity;
 import org.springframework.data.domain.Page;
 
@@ -13,10 +14,8 @@ import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
-@Converter
+@UtilityClass
 public class UserConverter {
-
-
 
     /**
      * UserEntity List를 UserResponse List로 변환
@@ -39,7 +38,7 @@ public class UserConverter {
                     List<UserResponse> userResponses = toResponseList(page.getContent());
 
                     // 페이징 정보 생성
-                    UserListResponse.PageInfo pageInfo = UserListResponse.PageInfo.builder()
+                    PageInfo pageInfo = PageInfo.builder()
                             .currentPage(page.getNumber())
                             .pageSize(page.getSize())
                             .totalElements(page.getTotalElements())
@@ -120,7 +119,7 @@ public class UserConverter {
      * 빈 UserListResponse 생성 (검색 결과가 없을 때)
      */
     public static UserListResponse toEmptyListResponse(UserListRequest request) {
-        UserListResponse.PageInfo pageInfo = UserListResponse.PageInfo.builder()
+        PageInfo pageInfo = PageInfo.builder()
                 .currentPage(request != null ? request.getPage() : 0)
                 .pageSize(request != null ? request.getSize() : 10)
                 .totalElements(0L)

@@ -1,5 +1,6 @@
 package org.shop.admin.domain.user.controller.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.Pattern;
@@ -47,29 +48,34 @@ public class UserListRequest {
             message = "날짜 형식은 ISO 8601 형식이어야 합니다 (예: 2023-12-01T23:59:59)")
     private String createdAtTo;
 
-    // Validation 헬퍼 메서드들
+    @JsonIgnore
     public boolean hasStatusFilter() {
         return status != null;
     }
 
+    @JsonIgnore
     public boolean hasEmailFilter() {
         return email != null && !email.trim().isEmpty();
     }
 
+    @JsonIgnore
     public boolean hasNameFilter() {
         return name != null && !name.trim().isEmpty();
     }
 
+    @JsonIgnore
     public boolean hasSearchKeyword() {
         return searchKeyword != null && !searchKeyword.trim().isEmpty();
     }
 
+    @JsonIgnore
     public boolean hasDateRangeFilter() {
         return (createdAtFrom != null && !createdAtFrom.trim().isEmpty()) ||
                 (createdAtTo != null && !createdAtTo.trim().isEmpty());
     }
 
     // 정렬 방향을 boolean으로 변환 (Spring Data JPA Sort용)
+    @JsonIgnore
     public boolean isAscending() {
         return "asc".equalsIgnoreCase(sortDirection);
     }

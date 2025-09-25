@@ -1,10 +1,10 @@
 package org.shop.admin.resolver;
 
 import lombok.RequiredArgsConstructor;
-import org.shop.admin.common.annotation.UserSession;
-import org.shop.admin.domain.adminUser.converter.AdminUserMapper;
-import org.shop.admin.domain.adminUser.model.AdminUser;
-import org.shop.admin.domain.adminUser.service.AdminUserService;
+import org.shop.common.api.annotation.UserSession;
+import org.shop.admin.domain.adminuser.converter.AdminUserMapper;
+import org.shop.admin.domain.adminuser.model.AdminUser;
+import org.shop.admin.domain.adminuser.service.AdminUserService;
 import org.springframework.core.MethodParameter;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;

@@ -3,10 +3,10 @@ package org.shop.admin.domain.token.helper;
 import io.jsonwebtoken.ExpiredJwtException;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.security.Keys;
-import org.shop.admin.common.error.TokenErrorCode;
-import org.shop.admin.common.exception.ApiException;
+import org.shop.common.api.exception.ApiException;
 import org.shop.admin.domain.token.ifs.TokenHelperIfs;
 import org.shop.admin.domain.token.model.TokenDto;
+import org.shop.common.api.error.TokenErrorCode;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 

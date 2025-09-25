@@ -1,9 +1,9 @@
 package org.shop.admin.exceptionhandler;
 
 import lombok.extern.slf4j.Slf4j;
-import org.shop.admin.common.api.Api;
-import org.shop.admin.common.error.ErrorCodeIfs;
-import org.shop.admin.common.error.InputValidationErrorCode;
+import org.shop.common.api.error.ErrorCodeIfs;
+import org.shop.common.api.error.InputValidationErrorCode;
+import org.shop.common.api.response.Api;
 import org.springframework.core.annotation.Order;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.ResponseEntity;
@@ -39,7 +39,7 @@ public class ValidExceptionHandler {
         return ResponseEntity
                 .status(errorCode.getHttpStatusCode())
                 .body(
-                        Api.ERROR(errorCode, errorDescription)
+                        Api.error(errorCode, errorDescription)
                 );
     }
 
@@ -60,7 +60,7 @@ public class ValidExceptionHandler {
             ErrorCodeIfs errorCode = InputValidationErrorCode.DUPLICATE_EMAIL;
             return ResponseEntity
                     .status(errorCode.getHttpStatusCode())
-                    .body(Api.ERROR(errorCode, "이미 사용 중인 이메일입니다."));
+                    .body(Api.error(errorCode, "이미 사용 중인 이메일입니다."));
         }
 
         // 🎯 전화번호 중복 체크
@@ -70,14 +70,14 @@ public class ValidExceptionHandler {
             ErrorCodeIfs errorCode = InputValidationErrorCode.DUPLICATE_PHONE;
             return ResponseEntity
                     .status(errorCode.getHttpStatusCode())
-                    .body(Api.ERROR(errorCode, "이미 사용 중인 전화번호입니다."));
+                    .body(Api.error(errorCode, "이미 사용 중인 전화번호입니다."));
         }
 
         // 🎯 기타 제약조건 위반
         ErrorCodeIfs errorCode = InputValidationErrorCode.CONSTRAINT_VIOLATION;
         return ResponseEntity
                 .status(errorCode.getHttpStatusCode())
-                .body(Api.ERROR(errorCode, "데이터 제약조건을 위반했습니다."));
+                .body(Api.error(errorCode, "데이터 제약조건을 위반했습니다."));
     }
 
     /**

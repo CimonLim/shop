@@ -6,9 +6,9 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.shop.api.common.api.Api;
-import org.shop.api.common.error.TokenErrorCode;
 import org.shop.api.filter.JwtAuthenticationFilter;
+import org.shop.common.api.error.TokenErrorCode;
+import org.shop.common.api.response.Api;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.web.AuthenticationEntryPoint;
 import org.springframework.stereotype.Component;
@@ -38,10 +38,10 @@ public class JwtAuthenticationEntryPoint implements AuthenticationEntryPoint {
             tokenErrorCode = TokenErrorCode.AUTHORIZATION_TOKEN_NOT_FOUND;
         }
 
-        log.info("토큰 에러: {} - {}", tokenErrorCode.getErrorCode(), tokenErrorCode.getDescription());
+        log.info("토큰 에러: {} - {}", tokenErrorCode.getErrorCodeValue(), tokenErrorCode.getDescription());
 
         // 기존 Api.ERROR() 구조 사용
-        Api<Object> apiResponse = Api.ERROR(tokenErrorCode, tokenErrorCode.getDescription());
+        Api<Object> apiResponse = Api.error(tokenErrorCode, tokenErrorCode.getDescription());
 
         // HTTP 응답 설정
         response.setStatus(tokenErrorCode.getHttpStatusCode());

@@ -1,15 +1,15 @@
 package org.shop.admin.domain.token.converter;
 
-import org.shop.admin.common.annotation.Converter;
-import org.shop.admin.common.error.ServerErrorCode;
-import org.shop.admin.common.exception.ApiException;
+import lombok.experimental.UtilityClass;
 import org.shop.admin.domain.token.controller.model.AccessTokenResponse;
 import org.shop.admin.domain.token.controller.model.TokenResponse;
 import org.shop.admin.domain.token.model.TokenDto;
+import org.shop.common.api.error.ServerErrorCode;
+import org.shop.common.api.exception.ApiException;
 
 import java.util.Objects;
 
-@Converter
+@UtilityClass
 public class TokenConverter {
 
     public static TokenResponse toResponse(

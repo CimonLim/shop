@@ -2,8 +2,8 @@ package org.shop.api.domain.user.controller;
 
 import io.swagger.v3.oas.annotations.Parameter;
 import lombok.RequiredArgsConstructor;
-import org.shop.api.common.annotation.UserSession;
-import org.shop.api.common.api.Api;
+import org.shop.common.api.annotation.UserSession;
+import org.shop.common.api.response.Api;
 import org.shop.api.domain.user.business.UserBusiness;
 import org.shop.api.domain.user.controller.model.UserResponse;
 import org.shop.api.domain.user.model.User;
@@ -23,7 +23,7 @@ public class UserApiController {
         @Parameter(hidden = true) @UserSession User user
     ){
         var response = userBusiness.me(user);
-        return Api.OK(response);
+        return Api.ok(response);
     }
 
 }

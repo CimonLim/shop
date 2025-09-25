@@ -1,13 +1,13 @@
 package org.shop.api.domain.token.business;
 
 import lombok.RequiredArgsConstructor;
-import org.shop.api.common.annotation.Business;
-import org.shop.api.common.error.ServerErrorCode;
-import org.shop.api.common.exception.ApiException;
 import org.shop.api.domain.token.controller.model.TokenResponse;
 import org.shop.api.domain.token.converter.TokenConverter;
 import org.shop.api.domain.token.model.RefreshTokenDto;
 import org.shop.api.domain.token.service.TokenService;
+import org.shop.common.api.annotation.Business;
+import org.shop.common.api.error.ServerErrorCode;
+import org.shop.common.api.exception.ApiException;
 import org.shop.db.BaseEntityUuid;
 import org.shop.db.user.UserEntity;
 

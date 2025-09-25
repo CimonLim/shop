@@ -2,10 +2,10 @@ package org.shop.api.domain.user.service;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.shop.api.common.error.ServerErrorCode;
-import org.shop.api.common.error.UserErrorCode;
-import org.shop.api.common.exception.ApiException;
 import org.shop.api.domain.user.controller.model.UserLoginRequest;
+import org.shop.common.api.error.ServerErrorCode;
+import org.shop.common.api.error.UserErrorCode;
+import org.shop.common.api.exception.ApiException;
 import org.shop.db.user.UserEntity;
 import org.shop.db.user.UserRepository;
 import org.shop.db.user.enums.UserRole;

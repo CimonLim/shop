@@ -3,8 +3,8 @@ package org.shop.admin.domain.auth.controller;
 import io.swagger.v3.oas.annotations.Parameter;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.shop.admin.common.api.Api;
-import org.shop.admin.common.utils.AuthorizationExtractor;
+import org.shop.common.api.response.Api;
+import org.shop.common.utils.AuthorizationExtractor;
 import org.shop.admin.domain.token.business.TokenBusiness;
 import org.shop.admin.domain.token.controller.model.TokenResponse;
 import org.springframework.web.bind.annotation.*;
@@ -22,7 +22,7 @@ public class AuthApiController {
     ) {
         var refreshToken = AuthorizationExtractor.extract(authorizationHeader);
         TokenResponse newTokens = tokenBusiness.refreshToken(refreshToken);
-        return Api.OK(newTokens);
+        return Api.ok(newTokens);
     }
 
 }

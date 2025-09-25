@@ -1,13 +1,13 @@
 package org.shop.admin.domain.token.service;
 
 import lombok.RequiredArgsConstructor;
-import org.shop.admin.common.error.ServerErrorCode;
-import org.shop.admin.common.error.TokenErrorCode;
-import org.shop.admin.common.exception.ApiException;
+import org.shop.common.api.exception.ApiException;
 import org.shop.admin.common.redis.repository.RefreshTokenRepository;
 import org.shop.admin.domain.token.ifs.TokenHelperIfs;
 import org.shop.admin.domain.token.model.RefreshTokenDto;
 import org.shop.admin.domain.token.model.TokenDto;
+import org.shop.common.api.error.ServerErrorCode;
+import org.shop.common.api.error.TokenErrorCode;
 import org.springframework.stereotype.Service;
 
 import java.util.HashMap;

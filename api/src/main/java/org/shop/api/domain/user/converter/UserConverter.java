@@ -1,15 +1,15 @@
 package org.shop.api.domain.user.converter;
 
-import org.shop.api.common.annotation.Converter;
-import org.shop.api.common.error.ServerErrorCode;
-import org.shop.api.common.exception.ApiException;
+import lombok.experimental.UtilityClass;
 import org.shop.api.domain.user.controller.model.UserRegisterRequest;
 import org.shop.api.domain.user.controller.model.UserResponse;
+import org.shop.common.api.error.ServerErrorCode;
+import org.shop.common.api.exception.ApiException;
 import org.shop.db.user.UserEntity;
 
 import java.util.Optional;
 
-@Converter
+@UtilityClass
 public class UserConverter {
 
     public static UserEntity registerRequestToEntity(UserRegisterRequest request) {

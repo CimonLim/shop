@@ -3,7 +3,35 @@ plugins {
     id 'org.springframework.boot' version '3.4.3'
     id 'io.spring.dependency-management' version '1.1.7'
 
+    id "org.sonarqube" version "4.4.1.3373"
+
 }
+
+sonar {
+    properties {
+        property "sonar.projectKey", "your-project-key"
+        property "sonar.projectName", "Your Project Name"
+        property "sonar.host.url", "http://localhost:9000"
+        property "sonar.token", "sqa_b06ca7fb1b34a2fa4e8ae8bbf74f0b69fb8337df"
+
+        property "sonar.gradle.skipCompile", "true"
+
+        property "sonar.scm.provider", "git"
+        property "sonar.scm.forceReloadAll", "true"
+
+        property "sonar.verbose", "true"
+        property "sonar.log.level", "DEBUG"
+
+        // 모든 모듈의 JaCoCo 리포트 경로 지정
+        property "sonar.coverage.jacoco.xmlReportPaths", subprojects.collect {
+            "${it.layout.buildDirectory.get()}/reports/jacoco/test/jacocoTestReport.xml"
+        }
+    }
+}
+
+//subprojects {
+//
+//}
 
 allprojects {
     apply plugin: 'java'  // 추가
@@ -12,6 +40,19 @@ allprojects {
 
     repositories {
         mavenCentral()
+    }
+
+    apply plugin: 'jacoco'
+
+    // 각 모듈에 테스트 리포트 생성 설정
+    tasks.named('test') {
+        finalizedBy jacocoTestReport
+    }
+
+    tasks.named('jacocoTestReport') {
+        reports {
+            xml.required = true
+        }
     }
 
 

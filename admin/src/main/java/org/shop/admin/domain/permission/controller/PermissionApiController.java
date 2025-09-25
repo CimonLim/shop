@@ -1,7 +1,7 @@
 package org.shop.admin.domain.permission.controller;
 
 import lombok.RequiredArgsConstructor;
-import org.shop.admin.common.api.Api;
+import org.shop.common.api.response.Api;
 import org.shop.admin.domain.permission.business.PermissionBusiness;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -17,7 +17,7 @@ public class PermissionApiController {
 
     @PostMapping("/reload")
     public Api<Boolean> reload() {
-        return Api.OK(permissionBusiness.reload());
+        return Api.ok(permissionBusiness.reload());
     }
 
 

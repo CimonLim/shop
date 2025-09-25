@@ -29,7 +29,7 @@ public class WebConfig implements WebMvcConfigurer {
     @Override
     public void configureMessageConverters(List<HttpMessageConverter<?>> converters) {
         converters.stream()
-                .filter(converter -> converter instanceof MappingJackson2HttpMessageConverter)
+                .filter(MappingJackson2HttpMessageConverter.class::isInstance)
                 .forEach(converter -> ((MappingJackson2HttpMessageConverter) converter)
                         .setObjectMapper(objectMapper));
     }

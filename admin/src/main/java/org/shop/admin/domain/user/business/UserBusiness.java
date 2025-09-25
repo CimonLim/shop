@@ -2,7 +2,7 @@ package org.shop.admin.domain.user.business;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.shop.admin.common.annotation.Business;
+import org.shop.common.api.annotation.Business;
 import org.shop.admin.domain.user.controller.model.UserListRequest;
 import org.shop.admin.domain.user.controller.model.UserListResponse;
 import org.shop.admin.domain.user.controller.model.UserResponse;

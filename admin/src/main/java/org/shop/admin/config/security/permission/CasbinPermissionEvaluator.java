@@ -3,8 +3,8 @@ package org.shop.admin.config.security.permission;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.casbin.jcasbin.main.Enforcer;
-import org.shop.admin.common.error.PermissionErrorCode;
-import org.shop.admin.common.exception.ApiException;
+import org.shop.common.api.error.PermissionErrorCode;
+import org.shop.common.api.exception.ApiException;
 import org.springframework.security.access.PermissionEvaluator;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Component;
@@ -76,7 +76,7 @@ public class CasbinPermissionEvaluator implements PermissionEvaluator {
             if (!hasPermission) {
 
                 String description = String.format(
-                        "Casbin resource permission denied: user='{}', resourceType='{}', resourceId='{}', action='{}'",
+                        "Casbin resource permission denied: user=%s, resourceType=%s, resourceId=%s, action=%s",
                         username, targetType, targetId, action);
 
                 // 예외 발생 - ApiExceptionHandler에서 처리됨

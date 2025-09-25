@@ -10,11 +10,13 @@ plugins {
     // Spring Dependency Management 플러그인 - 스프링 관련 의존성 버전 관리
     // 스프링 부트의 의존성 버전을 자동으로 관리해주어 호환성 문제 방지
     id 'io.spring.dependency-management'
+
 }
 
 // 프로젝트 그룹 ID - 프로젝트를 고유하게 식별하는 그룹명
 group = 'org.shop'
 version = '0.0.1-SNAPSHOT'
+
 
 // 의존성을 가져올 저장소 설정
 repositories {

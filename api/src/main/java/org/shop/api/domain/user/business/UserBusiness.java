@@ -2,9 +2,6 @@ package org.shop.api.domain.user.business;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.shop.api.common.annotation.Business;
-import org.shop.api.common.error.ServerErrorCode;
-import org.shop.api.common.exception.ApiException;
 import org.shop.api.domain.token.business.TokenBusiness;
 import org.shop.api.domain.token.controller.model.TokenResponse;
 import org.shop.api.domain.user.controller.model.UserLoginRequest;
@@ -13,6 +10,9 @@ import org.shop.api.domain.user.controller.model.UserResponse;
 import org.shop.api.domain.user.converter.UserConverter;
 import org.shop.api.domain.user.model.User;
 import org.shop.api.domain.user.service.UserService;
+import org.shop.common.api.annotation.Business;
+import org.shop.common.api.error.ServerErrorCode;
+import org.shop.common.api.exception.ApiException;
 import org.shop.db.user.UserEntity;
 
 import java.util.Optional;
@@ -23,7 +23,6 @@ import java.util.Optional;
 public class UserBusiness {
 
     private final UserService userService;
-
     private final TokenBusiness tokenBusiness;
 
 
